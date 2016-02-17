@@ -118,14 +118,14 @@ or I could be more specific an just look for specific letters, e.g. fia[fds] wou
 There are often times when working in R that one needs to run another command, script, or piece of software that is external to R. If I'm working in an R script want the operating system to run a command I can do this with the `system` command
 
 ```{r}
-system('grep -ir "fia" *.Rmd')
+#system('grep -ir "fia" *.Rmd')
 ```
 
 Furthermore, often we want to capture the output of that command directly into R, which we can do using the `intern` flag:
 
 ```{r}
-fia.lines = system('grep -ir "fia" *.Rmd',intern=TRUE)
-fia.lines[1:3]
+#fia.lines = system('grep -ir "fia" *.Rmd',intern=TRUE)
+#fia.lines[1:3]
 ```
 
 Finally, it is also worth mentioning that R has its own, internal, version of grep that can be useful for searching and subsetting data and which also supports RegExp. Unlike the command-line version of grep, this function returns the row numbers matching the search string. In the example below we use the function readLines to read unstructured text in as vector of strings, one corresponding to each row in a file. It also demonstrates the function `sub`, which is related to grep but which substitutes the matching string rather than just finding it.
@@ -148,7 +148,7 @@ netCDF, wget
 In this section I want to introduce another command-line utility, wget, which can be used to pull files and content off the web, and to demonstrate how netCDF can be used in R. For this example we will be using data from the WLEF eddy-covariance tower located in northern Wisconsin. Unlike most flux towers, WLEF is a "tall-tower" -- it's actually a 440m TV antenna -- which means that it integrates over a much larger footprint than most towers. Indeed, the tower is instrumented at multiple heights. First, let's use wget to grab the data off the web. A few notes: 1) wget could be used from command line rather than as a system command;  2) if you don't have wget installed, use your web browser
 
 ```{r}
-system("wget http://flux.aos.wisc.edu/data/cheas/wlef/netcdf/US-PFa-WLEF-TallTowerClean-2012-L0-vFeb2013.nc")
+#system("wget http://flux.aos.wisc.edu/data/cheas/wlef/netcdf/US-PFa-WLEF-TallTowerClean-2012-L0-vFeb2013.nc")
 ```
 
 Next, lets open the file and look at what it contains

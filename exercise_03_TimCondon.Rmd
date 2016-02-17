@@ -1,0 +1,77 @@
+---
+title: "exercise3"
+author: "Tim Condon"
+date: "February 8, 2016"
+output: html_document
+---
+
+1.
+```{r}
+getfia<-read.csv('http://apps.fs.fed.us/fiadb-downloads/RI_SEEDLING.CSV')
+
+getfia.sub<-getfia[!is.na(getfia$TREECOUNT),]
+
+plot(tapply(getfia.sub$SPCD,INDEX=getfia.sub$TREECOUNT,FUN=sum)~getfia.sub$SPCD,log='y')
+```
+
+2.
+```{r}
+library(RCurl)
+eddy.html<-getURL("http://fluxnet.ornl.gov/site_status")
+library(XML)
+eddy.table<-readHTMLTable(eddy.html)[[1]]
+```
+
+3.
+```{r}
+myCode = readLines("Exercise_03_BigData.Rmd")
+grep('#',myCode,myCode[x])
+```
+
+4.
+```{r}
+library(ncdf4)
+bost<-nc_open(http:thredds.daac.ornl.gov/thredds/dodsC/ornldaac/1220/mstmip_driver_global_hd_climate_tair_2004_v1.nc4)
+#tried this and tried to download directly
+#the request was unrecognized
+#I'm on windows unfortunately
+```
+
+5.
+```{r}
+library(MODISTools)
+MODISSubsets(data.frame(lat=46.0827,long=-89.9792,start.date=2012,end.date=2012),
+  Product="MOD13Q1",Bands="250m_16_days_EVI",Size=c(1,1),StartDate=TRUE)
+MODIS = read.csv(list.files(pattern=".asc")[1],header=FALSE,as.is=TRUE,na.string="-3000")
+EVI = apply(MODIS[,11:ncol(MODIS)],1,mean,na.rm=TRUE)*0.0001
+time = as.Date(substr(MODIS[,10],1,7),format="%Y%j")
+#plotting now
+plot(EVI~time,main='EVI Over Time',ylab='EVI',xlab='Time',type='b',col='forestgreen')
+```
+
+6.
+```{r}
+#connect to FIA database by pulling data directly down
+#use -e to edit the contents
+```
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
